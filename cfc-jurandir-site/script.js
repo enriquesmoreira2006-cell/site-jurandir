@@ -1,13 +1,22 @@
 const menuToggle = document.querySelector('.menu-toggle');
 const menu = document.querySelector('.menu');
 
-menuToggle?.addEventListener('click', () => {
-  const open = menu.classList.toggle('open');
-  menuToggle.setAttribute('aria-expanded', open);
-});
+if (menuToggle && menu) {
+  menuToggle.addEventListener('click', () => {
+    const isOpen = menu.classList.toggle('open');
+    menuToggle.setAttribute('aria-expanded', isOpen);
+  });
 
-document.querySelectorAll('.menu a').forEach(link => {
-  link.addEventListener('click', () => menu.classList.remove('open'));
-});
+  document.querySelectorAll('.menu a').forEach(link => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('open');
+      menuToggle.setAttribute('aria-expanded', false);
+    });
+  });
+}
 
-document.getElementById('year').textContent = new Date().getFullYear();
+// Atualizar ano no footer
+const yearElement = document.getElementById('year');
+if (yearElement) {
+  yearElement.textContent = new Date().getFullYear();
+}
